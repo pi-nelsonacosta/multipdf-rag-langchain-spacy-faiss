@@ -1,5 +1,5 @@
 
-# Proyecto Base con FastAPI y Docker
+# Proyecto Base con FastAPI
 
 Este proyecto es una estructura base para una aplicación web desarrollada con **FastAPI**, organizada en módulos y con soporte para Docker y CI/CD. 
 
