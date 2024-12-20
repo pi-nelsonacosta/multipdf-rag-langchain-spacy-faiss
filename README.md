@@ -32,6 +32,10 @@ El núcleo de la aplicación es una inteligencia artificial conversacional que e
 
 Este proceso integral permite a la aplicación leer, procesar, almacenar y consultar eficazmente grandes volúmenes de información contenida en archivos PDF, facilitando la interacción con el contenido a través de una IA conversacional.
 
+## Representacion de la arquitectura
+
+![Arquitectura del RAG](uploads/multirag.png)
+
 ## Estructura del Proyecto
 
 El proyecto está organizado de la siguiente manera:
