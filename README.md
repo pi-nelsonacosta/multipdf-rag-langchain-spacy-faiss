@@ -1,7 +1,36 @@
 
 # Proyecto Base con FastAPI
 
-Este proyecto es una estructura base para una aplicación web desarrollada con **FastAPI**, organizada en módulos y con soporte para Docker y CI/CD. 
+Este proyecto es una estructura base para una aplicación web desarrollada con **FastAPI**, organizada en módulos y con soporte para Docker y CI/CD.
+
+## Características
+
+- Base de datos FAISS, que es una base de datos vectorial de alta precisión y eficiencia.
+- Spacy, un motor de procesamiento de lenguaje natural.
+- Langchain, una biblioteca de inteligencia artificial.
+- FastAPI, una herramienta de desarrollo rápido y sencilla para Python.
+- PyPDF2, una biblioteca de Python para trabajar con archivos PDF.
+- Streamlit, una herramienta de desarrollo de interfaces de usuario.
+
+## Funcionalidades
+
+**Reading and Processing PDF Files**
+PDF Reader
+La primera función principal de nuestra aplicación está diseñada para leer archivos PDF. Cuando un usuario carga uno o más archivos PDF, la aplicación procesa cada página del documento y extrae el texto, combinándolo en una única cadena de texto continua.
+
+**Text Splitter**
+Una vez que se extrae el texto, se divide en fragmentos manejables para facilitar su procesamiento y análisis. Utilizando la biblioteca LangChain, el texto se segmenta en fragmentos de 1000 caracteres cada uno. Esta segmentación ayuda a optimizar el rendimiento durante el procesamiento y permite una búsqueda más eficiente en el contenido.
+
+**Creating a Searchable Text Database and Making Embeddings**
+Para hacer que el texto sea fácilmente consultable, la aplicación convierte los fragmentos de texto en representaciones vectoriales. Esta transformación permite realizar búsquedas rápidas y precisas dentro del contenido del PDF.
+
+**Vector Store**: Se utiliza la biblioteca FAISS para convertir los fragmentos de texto en vectores y almacenarlos localmente. Esta operación es esencial para permitir búsquedas eficientes dentro del conjunto de datos.
+Setting Up the Conversational AI
+El núcleo de la aplicación es una inteligencia artificial conversacional que emplea los modelos avanzados de OpenAI. Esta IA puede responder preguntas basadas en el contenido extraído de los PDFs.
+
+**Conversation Chain**: La IA utiliza una serie de prompts para entender el contexto y ofrecer respuestas precisas a las consultas de los usuarios. Si la respuesta a una pregunta no está disponible en el texto procesado, la IA responde con “answer is not available in the context”, asegurando que los usuarios no reciban información incorrecta.
+
+Este proceso integral permite a la aplicación leer, procesar, almacenar y consultar eficazmente grandes volúmenes de información contenida en archivos PDF, facilitando la interacción con el contenido a través de una IA conversacional.
 
 ## Estructura del Proyecto
 
