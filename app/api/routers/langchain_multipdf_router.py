@@ -13,6 +13,7 @@ import os
 import shutil
 from dotenv import load_dotenv
 import os
+import spacy
 
 load_dotenv()
 
@@ -20,6 +21,9 @@ app = FastAPI(title="PDF Chat API", description="API para cargar PDFs y realizar
 
 # Configuración para los embeddings
 embeddings = SpacyEmbeddings(model_name="en_core_web_sm")
+
+# Cargar el modelo de SpaCy para extracción de entidades (en español)
+nlp = spacy.load("es_core_news_sm")
 
 # Directorio para almacenar PDFs y la base de datos FAISS
 UPLOAD_DIR = "uploads"
@@ -54,7 +58,25 @@ llm = AzureChatOpenAI(
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
         api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
-    )    
+    )
+
+def enrich_question(user_question, chat_history):
+    """
+    Enriquecer la consulta del usuario utilizando la última pregunta del historial.
+    Si no hay historial, se devuelve la consulta original.
+    """
+    # Filtrar el historial para obtener solo las preguntas del usuario
+    user_questions = [msg["content"] for msg in chat_history if msg["role"] == "user"]
+
+    if user_questions:
+        # Tomar la última pregunta del historial
+        last_question = user_questions[-1]
+        enriched_question = f"{user_question} (Consulta previa: {last_question})"
+    else:
+        # Si no hay historial, usar la consulta original
+        enriched_question = user_question
+
+    return enriched_question
 
 
 def get_conversational_chain(tools, ques):
